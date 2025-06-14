@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Roulette Spin Tracker</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Arial" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      padding: 20px;
+    }
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      background: #fff;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #333;
+    }
+    .row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: center;
+    }
+    input[type="number"] {
+      width: 120px;
+      padding: 5px;
+    }
+    button {
+      padding: 5px 10px;
+      margin-left: 10px;
+    }
+    .slider-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    canvas {
+      max-width: 100%;
+      margin: 20px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Roulette Spin Tracker</h1>
+
+    <div class="row">
+      <span>Total Spins in DB: <span id="total-spins">0</span></span>
+      <span id="timer">Timer: 0:00</span>
+    </div>
+
+    <table id="frequency-table">
+      <thead>
+        <tr>
+          <th>Number</th>
+          <th>Hits</th>
+          <th>Actual %</th>
+          <th>Theory %</th>
+          <th>Diff</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <div class="row">
+      <input
+        type="number"
+        id="spin-input"
+        placeholder="Enter Spin (1,3,5...)"
+        onkeydown="if(event.key === 'Enter') submitSpin()"
+      />
+      <button onclick="submitSpin()">Add Spin</button>
+      <button onclick="resetDatabase()">🔄 Refresh</button>
+    </div>
+
+    <div class="slider-container">
+      <input type="range" id="spin-slider" min="0" max="0" disabled oninput="updateSliderLabel()" />
+      <span id="slider-label">No spins recorded</span>
+    </div>
+
+    <div class="row">
+      <button onclick="deleteSpin()">Delete Spin</button>
+    </div>
+
+    <h2>Statistics</h2>
+    <canvas id="numberChart"></canvas>
+    <canvas id="colorChart"></canvas>
+    <canvas id="martingaleChart"></canvas>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

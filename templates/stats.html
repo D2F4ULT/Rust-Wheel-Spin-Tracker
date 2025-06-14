@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Statistics</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{{ url_for('static', filename='js/visualize.js') }}"></script>
+<body>
+    <div class="container">
+        <h1>Roulette Outcome Frequencies</h1>
+        <canvas id="histChart"></canvas>
+    </div>
+</body>
+</html>
